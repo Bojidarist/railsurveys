@@ -1,24 +1,44 @@
-# README
+# Rail Surveys
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Create most informative surveys with the click of a button
 
-Things you may want to cover:
+## Table of Contents
+- [Rail Surveys](#rail-surveys)
+	- [Table of Contents](#table-of-contents)
+	- [Setup](#setup)
+	- [Endpoints](#endpoints)
 
-* Ruby version
+## Setup
 
-* System dependencies
+1. Install bundler:
 
-* Configuration
+    ```sh
+    gem install bundler
+    ```
 
-* Database creation
+2. Bundle:
 
-* Database initialization
+    ```sh
+    bundle
+    ```
 
-* How to run the test suite
+3. Migrate database:
 
-* Services (job queues, cache servers, search engines, etc.)
+    ```sh
+    rake db:migrate
+    ```
 
-* Deployment instructions
+4. Run server:
 
-* ...
+    ```sh
+    rails server
+    ```
+
+## Endpoints
+
+
+- [/surveys](./docs/SurveysEndpoint.md)
+- [/surveys/new](./docs/NewSurveyEndpoint.md)
+- [/surveys/:id](./docs/ShowSurveyEndpoint.md)
+- [/surveys/:id/edit](./docs/EditSurveyEndpoint.md)
+- [/surveys/result/:id](./docs/SurveyResultEndpoint.md)
