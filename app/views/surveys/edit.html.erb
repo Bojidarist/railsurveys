@@ -1,0 +1,29 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+		<%= link_to "Home", root_path %>
+	</li>
+    <li class="breadcrumb-item">
+		<%= link_to "Survey", @survey %>
+	</li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
+
+<h1 class="pb-4 mt-4 mb-4 border-bottom">Edit Survey</h1>
+<h2><%= @survey.question %></h2>
+
+<%= form_with(model: @survey, local: true) do |form| %>
+
+	<% @survey.answers.each do |answer| %>
+
+		<div class="input-group mb-4">
+			<%= form.label :answer, :class => "input-group-text" %>
+			<%= form.text_field answer.id, value: answer.description, required: true, :class => "form-control" %>
+		</div>
+	
+	<% end %>
+
+	<%= form.submit "Edit", :class => "btn btn-primary" %>
+
+<% end %>

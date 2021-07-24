@@ -1,4 +1,95 @@
 class SurveysController < ApplicationController
 	def index
-	end
+    @surveys = Survey.all
+  end
+
+  def show
+    begin
+      @survey = Survey.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :root
+    end
+  end
+
+  def update
+    answer_update_params.each do |key, value|
+      if !value.empty?
+        answer = Answer.find(key.to_i)
+        answer.update({ :description => value })
+      end
+    end
+
+    redirect_to Survey.find(params[:id])
+  end
+
+  def new
+    @survey = Survey.new
+  end
+
+  def edit
+    begin
+      @survey = Survey.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :root
+    end
+  end
+
+  def result
+    begin
+      @survey = Survey.find(params[:id])
+      @total_votes = 0
+
+      @survey.answers.each do |answer|
+        @total_votes += answer.votes
+      end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :root
+    end
+  end
+
+  def destroy
+    begin
+      @survey = Survey.find(params[:id])
+      @survey.destroy
+
+      return redirect_to :root
+    rescue ActiveRecord::RecordNotFound
+      return render plain: "Unable to delete survey"
+    end
+  end
+
+  def create
+    @survey = Survey.new(survey_params)
+
+    if (helpers.valid_number_of_answers?(answer_params))
+      @survey.errors.add(" ", "You must write at least 2 answers")
+      return render "new"
+    end
+
+    if (@survey.save)
+      answer_params.each do |key, value|
+        if !value.empty? 
+          @survey.answers.create(description: value, votes: 0)
+        end
+      end
+
+      redirect_to @survey
+    else
+      render "new"
+    end
+
+  end
+
+  private 
+  def survey_params
+    params.require(:survey).permit(:question)
+  end
+
+  def answer_params
+    params.require(:survey).permit(:answer, :answer1, :answer2, :answer3, :answer4, :answer5)
+  end
+
+  def answer_update_params
+    params.require(:survey)
+  end
 end
