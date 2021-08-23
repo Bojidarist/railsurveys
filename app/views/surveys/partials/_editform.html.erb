@@ -1,0 +1,14 @@
+<%= form_with(model: @survey, local: true) do |form| %>
+
+	<% @survey.answers.each do |answer| %>
+
+		<div class="input-group mb-4">
+			<%= form.label :answer, :class => "input-group-text" %>
+			<%= form.text_field answer.id, value: answer.description, required: true, :class => "form-control" %>
+		</div>
+	
+	<% end %>
+
+	<%= form.submit "Edit", :class => "btn btn-primary" %>
+
+<% end %>
