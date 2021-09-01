@@ -24,6 +24,7 @@ class SurveysController < ApplicationController
 
   def new
     @survey = Survey.new
+    2.times { @survey.answers.build }
   end
 
   def edit
@@ -61,15 +62,15 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
 
-    if (helpers.valid_number_of_answers?(answer_params))
+    unless helpers.valid_number_of_answers?(answer_params)
       @survey.errors.add(" ", "You must write at least 2 answers")
       return render "new"
     end
 
     if (@survey.save)
       answer_params.each do |key, value|
-        if !value.empty? 
-          @survey.answers.create(description: value, votes: 0)
+        unless value["description"].empty? 
+          @survey.answers.create(description: value["description"], votes: 0)
         end
       end
 
@@ -86,7 +87,7 @@ class SurveysController < ApplicationController
   end
 
   def answer_params
-    params.require(:survey).permit(:answer, :answer1, :answer2, :answer3, :answer4, :answer5)
+    params.require(:survey)["answers_attributes"]
   end
 
   def answer_update_params
