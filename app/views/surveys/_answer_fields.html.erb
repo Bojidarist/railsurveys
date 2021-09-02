@@ -2,7 +2,7 @@
     <div class="field input-group mb-4">
         <%= f.label :answer, :class => "input-group-text" %>
         <%= f.text_field :description, :class => "form-control" %>
+        <%= link_to_remove_association "Remove Answer", f, :class => "btn btn-outline-danger" %>
     </div>
 
-    <%= link_to_remove_association "remove answer", f %>
 </div>
