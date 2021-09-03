@@ -9,6 +9,7 @@ class VotesController < ApplicationController
 
     begin
       @answer = Answer.find(vote_params["vote"])
+      @survey = Survey.find(@answer.survey_id)
     rescue ActiveRecord::RecordNotFound
       redirect_to :root
     end
@@ -39,8 +40,22 @@ class VotesController < ApplicationController
       end
     end
 
+
+    # Restrict vote using ip
+    geo_vote = @survey.geo_votes.find_by(ip_address: request.remote_ip)
+    if geo_vote.nil?
+      @survey.geo_votes.create(ip_address: request.remote_ip, votes: 1)
+    else
+      if geo_vote.votes >= 5
+        flash[:danger] = "You cannot vote anymore"
+        return redirect_to @survey
+      else
+        geo_vote.update({ :votes => geo_vote.votes + 1 })
+      end
+    end
+
+    
     if @answer.update({ :votes => @answer.votes + 1 })
-      @survey = Survey.find(@answer.survey_id) 
       redirect_to result_survey_path(@survey.id)
     else
       redirect_to :root
