@@ -7,6 +7,10 @@
   </ol>
 </nav>
 
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
 <h1 class="pb-4 mt-4 mb-4 border-bottom"><%= @survey.question %></h1>
 
 <h2>Answers</h2>
