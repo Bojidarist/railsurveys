@@ -1,26 +1,27 @@
-<div class="d-flex align-items-center pb-4 mt-4 mb-4 border-bottom">
-	<h1>Rail Surveys</h1>
+<div class="d-flex align-items-center justify-content-between pb-4 mt-4 mb-4 border-bottom">
+    <h1>Rail Surveys</h1>
+    <%= render "auth_links" %>
 </div>
 
 <div class="pb-4 mt-4 mb-4 border-bottom">
-	<p>Create most informative surveys by clicking the button below</p>
-	<%= link_to "Create a survey", new_survey_path, :class => "btn btn-primary" %>
+    <p>Create most informative surveys by clicking the button below</p>
+    <%= link_to "Create a survey", new_survey_path, :class => "btn btn-primary" %>
 </div>
 
 <div class="card">
   <h5 class="card-header">Surveys</h5>
 
   <% if @surveys.empty? %>
-	<div class="text-center mt-2">
-		<p>No surveys</p>
-	</div>
+    <div class="text-center mt-2">
+        <p>No surveys</p>
+    </div>
   <% end %>
   <% @surveys.each do |survey| %>
 
-	<div class="card-body border-bottom">
-    	<h5 class="card-title"><%= survey.question %></h5>
-		<%= link_to "Open Survey", survey, :class => "btn btn-primary btn-sm" %>
-  	</div>	
+    <div class="card-body border-bottom">
+        <h5 class="card-title"><%= survey.question %></h5>
+        <%= link_to "Open Survey", survey, :class => "btn btn-primary btn-sm" %>
+      </div>	
   <% end %>
 
 </div>

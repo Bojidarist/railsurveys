@@ -1,6 +1,8 @@
 require 'json'
 
 class VotesController < ApplicationController
+  before_action :authenticate_user!
+
   def update
 
     if vote_params.nil?

@@ -32,6 +32,8 @@
 
 <div class="btn-group" role="group" aria-label="Basic outlined example">
   <%= link_to "View Results", result_survey_path(@survey.id), :class => "btn btn-outline-primary" %>
+  <% if user_signed_in? %>
   <%= link_to "Edit Survey", edit_survey_path(@survey.id), :class => "btn btn-outline-primary" %>
   <%= link_to "Delete Survey", survey_path(@survey), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-outline-danger" %>
+  <% end %>
 </div>
