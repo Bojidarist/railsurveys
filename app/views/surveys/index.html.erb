@@ -1,6 +1,9 @@
 <div class="d-flex align-items-center justify-content-between pb-4 mt-4 mb-4 border-bottom">
     <h1>Rail Surveys</h1>
-    <%= render "auth_links" %>
+    <div>
+        <% if current_user %><span>Welcome, <%= current_user.username %></span><% end %>
+        <%= render "auth_links" %>
+    </div>
 </div>
 
 <div class="pb-4 mt-4 mb-4 border-bottom">
