@@ -15,6 +15,9 @@ class SurveysController < ApplicationController
   end
 
   def update
+    @survey = Survey.find(params[:id])
+    return redirect_to :root unless helpers.is_current_user_uploader?(@survey.user)
+
     answer_update_params.each do |key, value|
       if !value.empty?
         answer = Answer.find(key.to_i)
@@ -22,7 +25,7 @@ class SurveysController < ApplicationController
       end
     end
 
-    redirect_to Survey.find(params[:id])
+    return redirect_to @survey
   end
 
   def new
@@ -36,6 +39,8 @@ class SurveysController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to :root
     end
+
+    redirect_to :root unless helpers.is_current_user_uploader?(@survey.user)
   end
 
   def result
@@ -54,7 +59,7 @@ class SurveysController < ApplicationController
   def destroy
     begin
       @survey = Survey.find(params[:id])
-      @survey.destroy
+      @survey.destroy if helpers.is_current_user_uploader?(@survey.user)
 
       return redirect_to :root
     rescue ActiveRecord::RecordNotFound
@@ -86,7 +91,8 @@ class SurveysController < ApplicationController
 
   end
 
-  private 
+  private
+
   def survey_params
     params.require(:survey).permit(:question)
   end

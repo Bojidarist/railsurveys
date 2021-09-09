@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-		<%= link_to "Home", root_path %>
-	</li>
+    <%= link_to "Home", root_path %>
+  </li>
     <li class="breadcrumb-item active" aria-current="page">Survey</li>
   </ol>
 </nav>
@@ -20,23 +20,25 @@
 
 <%= form_for :post, url: votes_update_path do |answer_form| %>
 
-	<% @survey.answers.each do |answer| %>
+  <% @survey.answers.each do |answer| %>
 
-		<div class="form-check">
-			<%= answer_form.radio_button "vote", answer.id, :id => answer.id, :class => "form-check-input" %>
-			<%= answer_form.label answer.description, :for => answer.id, :class => "form-check-label" %>
-		</div>		
-	
-	<% end %>
+    <div class="form-check">
+      <%= answer_form.radio_button "vote", answer.id, :id => answer.id, :class => "form-check-input" %>
+      <%= answer_form.label answer.description, :for => answer.id, :class => "form-check-label" %>
+    </div>		
+  
+  <% end %>
 
-	<%= answer_form.submit "Vote", :class => "btn mb-4 mt-2 btn-primary" %>
+  <%= answer_form.submit "Vote", :class => "btn mb-4 mt-2 btn-primary" %>
 
 <% end %>
 
 <div class="btn-group" role="group" aria-label="Basic outlined example">
   <%= link_to "View Results", result_survey_path(@survey.id), :class => "btn btn-outline-primary" %>
-  <% if user_signed_in? %>
+  
+  <% if user_signed_in? and (@uploader.id == current_user.id) %>
   <%= link_to "Edit Survey", edit_survey_path(@survey.id), :class => "btn btn-outline-primary" %>
   <%= link_to "Delete Survey", survey_path(@survey), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-outline-danger" %>
   <% end %>
+
 </div>

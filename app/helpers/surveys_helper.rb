@@ -15,6 +15,10 @@ module SurveysHelper
         number_of_valid_answers(answer_params) >= 2
     end
 
+    def is_current_user_uploader?(uploader)
+        return (current_user and (current_user.id == uploader.id))
+    end
+
     private
     def number_of_valid_answers(answer_params)
         answers_count = 0
