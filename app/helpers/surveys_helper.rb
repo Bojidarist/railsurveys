@@ -15,8 +15,14 @@ module SurveysHelper
         number_of_valid_answers(answer_params) >= 2
     end
 
-    def is_current_user_uploader?(uploader)
-        return (current_user and (current_user.id == uploader.id))
+    def is_current_user_uploader?(survey)
+        return false unless user_signed_in?
+        return current_user.id == survey.user.id
+    end
+
+    def current_user_has_permissions_to_edit?(survey)
+        return false unless user_signed_in?
+        return is_current_user_uploader?(survey) || current_user.admin?
     end
 
     private
