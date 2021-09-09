@@ -11,7 +11,10 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
-<h1 class="pb-4 mt-4 mb-4 border-bottom"><%= @survey.question %></h1>
+<div class="mb-4 mt-4 border-bottom">
+  <h1><%= @survey.question %></h1>
+  <em>Uploaded by: <%= @uploader.username %></em>
+</div>
 
 <h2>Answers</h2>
 

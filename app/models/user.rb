@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_many :surveys, dependent: :delete_all
+
   # only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username

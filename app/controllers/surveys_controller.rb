@@ -8,6 +8,7 @@ class SurveysController < ApplicationController
   def show
     begin
       @survey = Survey.find(params[:id])
+      @uploader = @survey.user
     rescue ActiveRecord::RecordNotFound
       redirect_to :root
     end
@@ -62,7 +63,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    @survey = Survey.new(survey_params)
+    @survey = current_user.surveys.new(survey_params)
 
     unless helpers.valid_number_of_answers?(answer_params)
       @survey.errors.add(" ", "You must write at least 2 answers")
