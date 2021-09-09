@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+  enum role: [:user, :admin]
+  after_initialize :set_default_role, :if => :new_record?
 
   has_many :surveys, dependent: :delete_all
-
   # only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username
@@ -16,6 +17,10 @@ class User < ApplicationRecord
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
     end
+  end
+
+  def set_default_role
+    self.role ||= :user
   end
 
   # Include default devise modules. Others available are:
