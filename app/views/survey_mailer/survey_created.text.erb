@@ -1,0 +1,8 @@
+The survey <%= @survey.question %> was created by <%= @username %>
+
+Answers:
+<% @survey.answers.each do |answer| %>
+- <%= answer.description %>
+<% end %>
+
+Survey Page - <%= survey_url(@survey) %>

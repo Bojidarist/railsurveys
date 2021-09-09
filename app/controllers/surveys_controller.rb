@@ -76,6 +76,8 @@ class SurveysController < ApplicationController
         end
       end
 
+      SurveyMailer.with(username: current_user.username, survey: @survey).survey_created.deliver_later
+
       redirect_to @survey
     else
       render "new"
