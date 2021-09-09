@@ -7,9 +7,11 @@
     <h1>The survey <%= @survey.question %> was created by <%= @username %></h1>
 
     <h2>Answers:</h2>
-    <% @survey.answers.each do |answer| %>
-      <p><%= answer.description %></p>
-    <% end %>
+    <ul>
+      <% @survey.answers.each do |answer| %>
+        <li><%= answer.description %></li>
+      <% end %>
+    </ul>
 
     <%= link_to "Survey Page", @survey %>
   </body>
