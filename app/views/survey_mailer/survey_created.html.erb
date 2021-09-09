@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>The survey <%= @survey.question %> was created by <%= @username %></h1>
+    <h1>The survey <%= @survey.question %> was created by <%= @survey.user.username %></h1>
 
     <h2>Answers:</h2>
     <ul>

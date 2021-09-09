@@ -1,4 +1,4 @@
-The survey <%= @survey.question %> was created by <%= @username %>
+The survey <%= @survey.question %> was created by <%= @survey.user.username %>
 
 Answers:
 <% @survey.answers.each do |answer| %>
