@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :result]
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.active_surveys
   end
 
   def show
@@ -12,6 +12,8 @@ class SurveysController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to :root
     end
+
+    redirect_to :root unless @survey.active? || helpers.current_user_has_permissions_to_edit?(@survey)
   end
 
   def update

@@ -1,6 +1,10 @@
 class Survey < ApplicationRecord
     enum status: [:active, :pending, :rejected]
     after_initialize :set_default_status, :if => :new_record?
+    
+    scope :active_surveys, -> { where(status: :active) }
+    scope :pending_surveys, -> { where(status: :pending) }
+    scope :rejected_surveys, -> { where(status: :rejected) }
 
     has_many :answers, dependent: :delete_all, inverse_of: :survey
     has_many :geo_votes, dependent: :delete_all
