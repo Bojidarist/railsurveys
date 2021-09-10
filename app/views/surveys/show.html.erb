@@ -7,10 +7,6 @@
   </ol>
 </nav>
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
 <div class="mb-4 mt-4 border-bottom">
   <h1><%= @survey.question %></h1>
   <em>Uploaded by: <%= @uploader.username %></em>

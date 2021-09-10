@@ -1,0 +1,28 @@
+<div class="d-flex align-items-center justify-content-between mb-4 border-bottom">
+  <h1>Admin Panel</h1>
+  <%= link_to "Home", root_path, :class => "btn btn-primary link-light" %>
+</div>
+
+<div class="card">
+  <h5 class="card-header">Pending Surveys</h5>
+
+  <% if @pending_surveys.empty? %>
+    <div class="text-center mt-2">
+      <p>No surveys</p>
+    </div>
+  <% end %>
+  <% @pending_surveys.each do |survey| %>
+
+    <div class="card-body border-bottom">
+      <h5 class="card-title"><%= survey.question %></h5>
+      <div class="d-flex align-items-center justify-content-between">
+        <%= link_to "Open Survey", survey, :class => "btn btn-primary btn-sm" %>
+        <div>
+          <%= link_to "Accept Survey", site_admins_change_survey_status_path(survey.id, "active"), :class => "btn btn-success btn-sm" %>
+          <%= link_to "Reject Survey", site_admins_change_survey_status_path(survey.id, "rejected"), :class => "btn btn-danger btn-sm" %>
+        </div>
+      </div>
+    </div>	
+  <% end %>
+
+</div>
