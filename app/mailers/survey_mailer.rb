@@ -3,7 +3,7 @@ class SurveyMailer < ApplicationMailer
     
     def survey_created
         @survey = params[:survey]
-        mail(to: "admin@railsurveys.com",
+        mail(to: User.admins.pluck(:email),
             subject: "New survey created by #{ @survey.user.username }")
     end
 end
