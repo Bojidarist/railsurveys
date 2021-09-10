@@ -2,6 +2,9 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  scope :users, -> { where(role: :user) }
+  scope :admins, -> { where(role: :admin) }
+
   has_many :surveys, dependent: :delete_all
   # only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
