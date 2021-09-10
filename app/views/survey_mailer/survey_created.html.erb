@@ -4,8 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>The survey "<%= @survey.question %>" was created by "<%= @survey.user.username %>"</h1>
+    <h1>A new survey was created by "<%= @survey.user.username %>"</h1>
 
+    <h2>Question: <%= @survey.question %></h2>
     <h2>Answers:</h2>
     <ul>
       <% @survey.answers.each do |answer| %>
@@ -14,5 +15,7 @@
     </ul>
 
     <%= link_to "Survey Page", @survey %>
+    <%= link_to "Accept Survey", site_admins_change_survey_status_url(@survey.id, "active") %>
+    <%= link_to "Reject Survey", site_admins_change_survey_status_url(@survey.id, "rejected") %>
   </body>
 </html>
