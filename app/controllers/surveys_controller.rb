@@ -71,6 +71,10 @@ class SurveysController < ApplicationController
 
   def create
     @survey = current_user.surveys.new(survey_params)
+    
+    if current_user.admin?
+      @survey.status = :active
+    end
 
     unless helpers.valid_number_of_answers?(answer_params)
       @survey.errors.add(" ", "You must write at least 2 answers")
