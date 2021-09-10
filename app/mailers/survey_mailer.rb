@@ -6,4 +6,9 @@ class SurveyMailer < ApplicationMailer
         mail(to: User.admins.pluck(:email),
             subject: "New survey created by #{ @survey.user.username }")
     end
+
+    def survey_status_changed
+        @survey = params[:survey]
+        mail(to: @survey.user.email, subject: "The status of your survey was changed by an admin")
+    end
 end
