@@ -88,7 +88,7 @@ class SurveysController < ApplicationController
         end
       end
 
-      SurveyMailer.with(survey: @survey).survey_created.deliver_later
+      SurveyMailer.with(survey: @survey).survey_created.deliver_later unless current_user.admin?
 
       redirect_to @survey
     else
