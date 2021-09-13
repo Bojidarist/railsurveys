@@ -3,7 +3,9 @@ class SiteAdminsController < ApplicationController
   before_action :admin_check
   
   def admin_panel
-    @pending_surveys = Survey.pending_surveys
+    @grid = SurveysGrid.new(grid_params) do |scope|
+      scope.page(params[:page]).per(5)
+    end
   end
 
   def change_survey_status
@@ -22,5 +24,9 @@ class SiteAdminsController < ApplicationController
       flash[:danger] = "You don't have permissions to view this page."
       redirect_to :root
     end
+  end
+
+  def grid_params
+    params.fetch(:surveys_grid, {}).permit!
   end
 end
