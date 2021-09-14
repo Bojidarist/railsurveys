@@ -69,3 +69,4 @@ gem 'letter_opener', group: :development
 gem 'datagrid'
 gem 'kaminari'
 gem 'sidekiq'
+gem 'caxlsx'
