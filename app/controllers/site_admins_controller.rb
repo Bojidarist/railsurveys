@@ -11,7 +11,7 @@ class SiteAdminsController < ApplicationController
   def change_survey_status
     if params["id"] and Survey.statuses[params["status"]]
       @survey = Survey.update(params["id"].to_i, :status => Survey.statuses[params["status"]])
-      SurveyMailer.with(survey: @survey).survey_status_changed.deliver_later
+      MailSurveyStatusChangedWorker.perform_async(@survey.id)
     end
 
     redirect_to site_admins_admin_panel_path
