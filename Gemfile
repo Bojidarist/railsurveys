@@ -70,6 +70,7 @@ gem 'kaminari'
 gem 'sidekiq'
 gem 'caxlsx'
 gem 'erubis'
+gem 'rails_admin'
 
 # Use postgresql for db
 gem 'pg'
