@@ -1,0 +1,10 @@
+.d-flex.align-items-center.justify-content-between.mb-4.border-bottom
+  %h1 Admin Panel
+  = link_to "Home", root_path, :class => "btn btn-primary link-light"
+%div
+  = datagrid_form_for @grid, :method => :get, :url => site_admins_admin_panel_path
+  .mt-4
+    = link_to "Download Surveys Report", site_admins_download_surveys_xlsx_path, :target => "_blank", :class => "btn btn-primary btn-sm"
+  .mt-2.mb-4
+    = datagrid_table @grid
+    = paginate(@grid.assets)

@@ -1,0 +1,10 @@
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to "Home", root_path
+    %li.breadcrumb-item
+      = link_to "Survey", @survey
+    %li.breadcrumb-item.active{"aria-current" => "page"} Edit
+%h1.pb-4.mt-4.mb-4.border-bottom Edit Survey
+%h2= @survey.question
+= render "editform"

@@ -1,0 +1,20 @@
+= form_for @survey do |form|
+  - if @survey.errors.any?
+    #error_explanation.pb-4.mt-4.mb-2.border-bottom
+      %h2
+        = pluralize(@survey.errors.count, "error")
+        prohibited
+        this survey from being saved:
+      %ul
+        - @survey.errors.full_messages.each do |msg|
+          %li= msg
+  .input-group.pb-4.pt-2.mb-4.border-bottom
+    = form.label :question, :value => "Question", :class => "input-group-text"
+    = form.text_field :question, required: true, :class => "form-control"
+  #answers
+    = form.fields_for :answers do |answer_form|
+      = render "answer_fields", f: answer_form
+    .links
+      = link_to_add_association 'Add Answer', form, :answers, :class => "btn btn-outline-primary mb-4"
+  %div
+    = form.submit "Create", :class => "btn btn-primary"
