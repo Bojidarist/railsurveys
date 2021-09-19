@@ -22,6 +22,12 @@ Create most informative surveys with the click of a button
     docker-compose exec app bundle exec rake db:setup
     ```
 
+3. If you have permission problems with files created by the docker containers simply chown the directory:
+   
+    ```sh
+    sudo chown -R $USER railsurveys/
+    ```
+
 ## Endpoints
 
 - [/surveys](./docs/SurveysEndpoint.md)
