@@ -1,0 +1,19 @@
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to "Home", root_path
+    %li.breadcrumb-item
+      = link_to "Survey", @survey
+    %li.breadcrumb-item.active{"aria-current" => "page"} Results
+%h1.pb-4.mt-4.mb-4.border-bottom Results
+%h2
+  = @survey.question
+%p
+  Total votes: #{@total_votes}
+- @survey.answers.each do |answer|
+  .list-group
+    .list-group-item
+      = answer.description
+      .progress
+        .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{vote_as_percentage(answer, @total_votes)}", :role => "progressbar", :style => "width: #{vote_as_percentage(answer, @total_votes)};"}
+          = vote_as_percentage(answer, @total_votes)

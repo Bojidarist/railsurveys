@@ -1,0 +1,22 @@
+.d-flex.align-items-center.justify-content-between.pb-4.mt-4.mb-4.border-bottom
+  %h1 Rail Surveys
+  %div
+    %div
+      - if current_user
+        %span
+          Welcome, #{current_user.username}
+        - if current_user.admin?
+          = link_to "Admin Panel", site_admins_admin_panel_path, :class => "btn btn-primary link-light"
+      = render "auth_links"
+.pb-4.mt-4.mb-4.border-bottom
+  %p Create most informative surveys by clicking the button below
+  = link_to "Create a survey", new_survey_path, :class => "btn btn-primary"
+.card
+  %h5.card-header Surveys
+  - if @surveys.empty?
+    .text-center.mt-2
+      %p No surveys
+  - @surveys.each do |survey|
+    .card-body.border-bottom
+      %h5.card-title= survey.question
+      = link_to "Open Survey", survey, :class => "btn btn-primary btn-sm"

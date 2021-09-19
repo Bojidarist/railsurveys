@@ -1,0 +1,10 @@
+A new survey was created by "#{@survey.user.username}"
+
+Question: #{@survey.question}
+
+Answers:
+- @survey.answers.each do |answer|
+  \- #{answer.description}
+Survey Page - #{survey_url(@survey)}
+Accept Survey - #{site_admins_change_survey_status_url(@survey.id, "active")}
+Reject Survey - #{site_admins_change_survey_status_url(@survey.id, "rejected")}

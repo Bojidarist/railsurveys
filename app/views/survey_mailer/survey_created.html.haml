@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      A new survey was created by "#{@survey.user.username}"
+    %h2
+      Question: #{@survey.question}
+    %h2 Answers:
+    %ul
+      - @survey.answers.each do |answer|
+        %li= answer.description
+    = link_to "Survey Page", @survey
+    = link_to "Accept Survey", site_admins_change_survey_status_url(@survey.id, "active")
+    = link_to "Reject Survey", site_admins_change_survey_status_url(@survey.id, "rejected")
