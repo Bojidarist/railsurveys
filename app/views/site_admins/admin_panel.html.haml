@@ -1,6 +1,8 @@
 .d-flex.align-items-center.justify-content-between.mb-4.border-bottom
   %h1 Admin Panel
-  = link_to "Home", root_path, :class => "btn btn-primary link-light"
+  %div
+    = link_to "Rails Admin", rails_admin_path, :target => "_blank", :class => "btn btn-dark link-light"
+    = link_to "Home", root_path, :class => "btn btn-primary link-light"
 %div
   = datagrid_form_for @grid, :method => :get, :url => site_admins_admin_panel_path
   .mt-4

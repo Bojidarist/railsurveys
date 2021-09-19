@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/site_admins/rails_admin', as: 'rails_admin'
   devise_for :users
   root "surveys#index"
   post "votes/update"
