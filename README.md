@@ -4,38 +4,25 @@ Create most informative surveys with the click of a button
 
 ## Table of Contents
 - [Rail Surveys](#rail-surveys)
-	- [Table of Contents](#table-of-contents)
-	- [Setup](#setup)
-	- [Endpoints](#endpoints)
+  - [Table of Contents](#table-of-contents)
+  - [Setup with docker](#setup-with-docker)
+  - [Endpoints](#endpoints)
 
-## Setup
+## Setup with docker
 
-1. Install bundler:
+1. Run docker-compose:
 
     ```sh
-    gem install bundler
+    docker-compose up
     ```
 
-2. Bundle:
+2. Setup database:
 
     ```sh
-    bundle
-    ```
-
-3. Migrate database:
-
-    ```sh
-    rake db:migrate
-    ```
-
-4. Run server:
-
-    ```sh
-    rails server
+    docker-compose exec app bundle exec rake db:setup
     ```
 
 ## Endpoints
-
 
 - [/surveys](./docs/SurveysEndpoint.md)
 - [/surveys/new](./docs/NewSurveyEndpoint.md)
