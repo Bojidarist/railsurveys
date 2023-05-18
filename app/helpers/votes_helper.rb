@@ -1,7 +1,7 @@
 module VotesHelper
-  def can_vote_cookie?(answer)
-    if cookies["voted_#{answer.survey_id}"].nil?
-      cookies["voted_#{answer.survey_id}"] = true
+  def can_vote_cookie?(survey)
+    if cookies["voted_#{survey.id}"].nil?
+      cookies["voted_#{survey.id}"] = true
 
       return true
     end

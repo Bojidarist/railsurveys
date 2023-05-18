@@ -100,7 +100,7 @@ class SurveysController < ApplicationController
   private
 
   def survey_params
-    params.require(:survey).permit(:question)
+    params.require(:survey).permit(:question, :survey_type)
   end
 
   def answer_params

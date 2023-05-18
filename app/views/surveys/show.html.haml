@@ -9,10 +9,15 @@
     Uploaded by: #{@uploader.username}
 %h2 Answers
 = form_for :post, url: votes_update_path do |answer_form|
+  = hidden_field_tag :survey_id, @survey.id
   - @survey.answers.each do |answer|
     .form-check
-      = answer_form.radio_button "vote", answer.id, :id => answer.id, :class => "form-check-input"
-      = answer_form.label answer.description, :for => answer.id, :class => "form-check-label"
+      - if @survey.survey_type == "single_answer"
+        = answer_form.radio_button "vote", answer.id, :id => answer.id, :class => "form-check-input"
+        = answer_form.label answer.description, :for => answer.id, :class => "form-check-label"
+      - if @survey.survey_type == "multi_answer"
+        = answer_form.check_box "vote_#{answer.id}", :id => answer.id, :class => "form-check-input"
+        = answer_form.label answer.description, :for => answer.id, :class => "form-check-label"
   = answer_form.submit "Vote", :class => "btn mb-4 mt-2 btn-primary"
 .btn-group{"aria-label" => "Basic outlined example", :role => "group"}
   = link_to "View Results", result_survey_path(@survey.id), :class => "btn btn-outline-primary"

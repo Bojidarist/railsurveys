@@ -9,7 +9,7 @@
 %h2
   = @survey.question
 %p
-  Total votes: #{@total_votes}
+  Total votes: #{@survey.votes}
 - @survey.answers.each do |answer|
   .list-group
     .list-group-item

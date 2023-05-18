@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_070104) do
+ActiveRecord::Schema.define(version: 2023_05_18_202506) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.text "description"
@@ -36,6 +39,8 @@ ActiveRecord::Schema.define(version: 2021_09_10_070104) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "status"
+    t.string "survey_type", default: "single_answer"
+    t.integer "votes", default: 0
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 

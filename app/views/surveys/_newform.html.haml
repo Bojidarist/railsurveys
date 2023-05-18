@@ -9,6 +9,9 @@
         - @survey.errors.full_messages.each do |msg|
           %li= msg
   .input-group.pb-4.pt-2.mb-4.border-bottom
+    = form.label :survey_type, :value => "Survey type", :class => "input-group-text"
+    = form.select :survey_type, [["Single Answer", "single_answer"],["Multi Answer", "multi_answer"]], { include_blank: false }, class: "form-select"
+  .input-group.pb-4.pt-2.mb-4.border-bottom
     = form.label :question, :value => "Question", :class => "input-group-text"
     = form.text_field :question, required: true, :class => "form-control"
   #answers
